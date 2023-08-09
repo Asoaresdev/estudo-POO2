@@ -14,3 +14,28 @@ Content-Type: application/json
     "email":"teste@email",
     "password":"teste123"
 }
+
+###
+
+GET http://localhost:3003/accounts/a002/balance
+
+###
+GET http://localhost:3003/accounts
+
+###
+
+POST http://localhost:3003/accounts
+Content-Type: application/json
+
+{
+    "id":"a003[TESTE]",
+    "ownerId":"teste01"
+}
+
+###
+PUT http://localhost:3003/accounts/a003[TESTE]/balance
+Content-Type: application/json
+
+{
+    "value": 10000
+}
