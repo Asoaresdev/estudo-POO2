@@ -1,5 +1,5 @@
 # POO 
-**Respositório para prática e estudo de POO**
+**Repositório para prática e estudo de POO**
 
 
 
