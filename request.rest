@@ -1,0 +1,16 @@
+GET http://localhost:3003/ping
+
+###
+
+GET http://localhost:3003/users
+
+###
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "id":"teste01",
+    "name":"teste",
+    "email":"teste@email",
+    "password":"teste123"
+}
