@@ -9,15 +9,15 @@ POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-    "id":"teste01",
-    "name":"teste",
-    "email":"teste@email",
+    "id":"teste014",
+    "name":"teste4 camada business",
+    "email":"teste014@email",
     "password":"teste123"
 }
 
 ###
 
-GET http://localhost:3003/accounts/a002/balance
+GET http://localhost:3003/accounts/a001/balance
 
 ###
 GET http://localhost:3003/accounts
@@ -28,7 +28,7 @@ POST http://localhost:3003/accounts
 Content-Type: application/json
 
 {
-    "id":"a003[TESTE]",
+    "id":"a004[TESTE camada business]",
     "ownerId":"teste01"
 }
 
@@ -37,5 +37,5 @@ PUT http://localhost:3003/accounts/a003[TESTE]/balance
 Content-Type: application/json
 
 {
-    "value": 10000
+    "value": 50000
 }
