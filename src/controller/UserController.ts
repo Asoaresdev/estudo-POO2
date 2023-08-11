@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
-import { UserDatabase } from "../database/UserDatabase"
-import { UserDB, UserDBPost } from "../types"
-import { User } from "../models/User"
+// import { UserDatabase } from "../database/UserDatabase"
+// import { UserDB, UserDBPost } from "../types"
+// import { User } from "../models/User"
 import { UserBusiness } from "../business/UserBusiness"
+import { BaseError } from "../errors/BaseError"
 
 export class UserController {
     public getUsers = async (req: Request, res: Response) => {
@@ -18,18 +19,13 @@ export class UserController {
         } catch (error) {
             console.log(error)
 
-            if (req.statusCode === 200) {
-                res.status(500)
-            }
-
-            if (error instanceof Error) {
-                res.send(error.message)
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message) //aqui incluimos o método status com o código do erro correto
             } else {
-                res.send("Erro inesperado")
+                res.status(500).send("Erro inesperado")
             }
         }
     }
-
 
     public postUser = async (req: Request, res: Response) => {
         try {
@@ -49,14 +45,10 @@ export class UserController {
         } catch (error) {
             console.log(error)
 
-            if (req.statusCode === 200) {
-                res.status(500)
-            }
-
-            if (error instanceof Error) {
-                res.send(error.message)
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message) //aqui incluimos o método status com o código do erro correto
             } else {
-                res.send("Erro inesperado")
+                res.status(500).send("Erro inesperado")
             }
         }
     }
