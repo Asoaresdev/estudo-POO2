@@ -38,7 +38,7 @@ export class AccountController {
             const accountBusiness = new AccountBusiness()
             const output = await accountBusiness.getBalance(input)
 
-            res.status(200).send({ output })
+            res.status(200).send(output)
         } catch (error) {
             console.log(error)
 

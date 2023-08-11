@@ -37,8 +37,10 @@ export class AccountBusiness {
             accountDB.created_at
         )
 
-        const output = account.getBalance()
-        
+        const output = {
+            balance: account.getBalance()
+        } 
+       
         return output
         
     }

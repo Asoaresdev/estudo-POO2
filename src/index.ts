@@ -7,6 +7,7 @@ import { UserDatabase } from './database/UserDatabase'
 import { AccountDatabase } from './database/AccountDatabase'
 import { UserController } from './controller/UserController'
 import { AccountController } from './controller/AccountController'
+import { userRouter } from './router/userRouter'
 
 const app = express()
 
@@ -34,6 +35,8 @@ app.get("/ping", async (req: Request, res: Response) => {
         }
     }
 })
+
+app.use("/users", userRouter)
 
 const userController = new UserController()
 const accountCrontoller = new AccountController()
