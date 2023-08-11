@@ -8,6 +8,7 @@ import { AccountDatabase } from './database/AccountDatabase'
 import { UserController } from './controller/UserController'
 import { AccountController } from './controller/AccountController'
 import { userRouter } from './router/userRouter'
+import { accountRouter } from './router/accountRouter'
 
 const app = express()
 
@@ -38,7 +39,7 @@ app.get("/", async (req: Request, res: Response) => {
 })
 
 app.use("/users", userRouter)
-app.use("/accounts", userRouter)
+app.use("/accounts", accountRouter)
 
 // const userController = new UserController()
 // const accountCrontoller = new AccountController()

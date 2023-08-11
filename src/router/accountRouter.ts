@@ -6,6 +6,6 @@ export const accountRouter = express.Router()
 const accountCrontoller = new AccountController
 
 accountRouter.get("/", accountCrontoller.getAccounts)
-accountRouter.post("/", accountCrontoller.postAccount)
+accountRouter.post("/new-account", accountCrontoller.postAccount)
 accountRouter.put("/:id/balance", accountCrontoller.editAccount)
 accountRouter.get("/:id/balance", accountCrontoller.getBalance)
