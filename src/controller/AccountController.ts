@@ -1,8 +1,8 @@
 import { Request, Response } from "express"
-import { AccountDatabase } from "../database/AccountDatabase"
+// import { AccountDatabase } from "../database/AccountDatabase"
 
-import { Account } from "../models/Account"
-import { AccountDB } from "../types"
+// import { Account } from "../models/Account"
+// import { AccountDB } from "../types"
 import { AccountBusiness } from "../business/AccountBusiness"
 
 export class AccountController {
@@ -16,7 +16,7 @@ export class AccountController {
         } catch (error) {
             console.log(error)
 
-            if (req.statusCode === 200) {
+            if (res.statusCode === 200) {
                 res.status(500)
             }
 
@@ -42,7 +42,7 @@ export class AccountController {
         } catch (error) {
             console.log(error)
 
-            if (req.statusCode === 200) {
+            if (res.statusCode === 200) {
                 res.status(500)
             }
 
@@ -69,7 +69,7 @@ export class AccountController {
         } catch (error) {
             console.log(error)
     
-            if (req.statusCode === 200) {
+            if (res.statusCode === 200) {
                 res.status(500)
             }
     
@@ -98,7 +98,7 @@ export class AccountController {
         } catch (error) {
             console.log(error)
     
-            if (req.statusCode === 200) {
+            if (res.statusCode === 200) {
                 res.status(500)
             }
     

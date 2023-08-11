@@ -1,4 +1,5 @@
 import { UserDatabase } from "../database/UserDatabase"
+import { BadRequestError } from "../errors/BadRequestError"
 import { User } from "../models/User"
 import { UserDB } from "../types"
 
@@ -17,7 +18,7 @@ export class UserBusiness {
             userDB.created_at
         ))
 
-        const output: any = users
+        const output: User[] = users
         return output
     }
 
@@ -25,32 +26,28 @@ export class UserBusiness {
         const { id, name, email, password } = input
 
         if (typeof id !== "string") {
-            // res.status(400)
-            throw new Error("'id' deve ser string")
+            throw new BadRequestError("'id' deve ser string")
         }
 
         if (typeof name !== "string") {
-            // res.status(400)
-            throw new Error("'name' deve ser string")
+            throw new BadRequestError("'name' deve ser string")
         }
 
         if (typeof email !== "string") {
-            // res.status(400)
-            throw new Error("'email' deve ser string")
+            throw new BadRequestError("'email' deve ser string")
         }
 
         if (typeof password !== "string") {
-            // res.status(400)
-            throw new Error("'password' deve ser string")
+            throw new BadRequestError("'password' deve ser string")
         }
 
         const userDatabase = new UserDatabase()
-        const userDBExists = await userDatabase.findUserById(id)
+        const userDBExists = await userDatabase.findUserById(id, email)
 
         if (userDBExists) {
-            // res.status(400)
-            throw new Error("'id' já existe")
+            throw new BadRequestError("'id' ou email já existe")
         }
+    
 
         const newUser = new User(
             id,
