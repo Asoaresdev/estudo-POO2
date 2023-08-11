@@ -18,9 +18,10 @@ app.listen(3003, () => {
     console.log(`Servidor rodando na porta ${3003}`)
 })
 
-app.get("/ping", async (req: Request, res: Response) => {
+
+app.get("/", async (req: Request, res: Response) => {
     try {
-        res.status(200).send({ message: "Pong!" })
+        res.status(200).send({ message: "Bem vindo(a) a API desenvolvida para fins educacionais. Pratica de POO e arquitetura de 3 camadas" })
     } catch (error) {
         console.log(error)
 
@@ -37,23 +38,24 @@ app.get("/ping", async (req: Request, res: Response) => {
 })
 
 app.use("/users", userRouter)
+app.use("/accounts", userRouter)
 
-const userController = new UserController()
-const accountCrontoller = new AccountController()
+// const userController = new UserController()
+// const accountCrontoller = new AccountController()
 
-app.get("/users", userController.getUsers)
-
-
-app.post("/users", userController.postUser)
+// app.get("/users", userController.getUsers)
 
 
-app.get("/accounts", accountCrontoller.getAccounts)
+// app.post("/users", userController.postUser)
 
 
-app.get("/accounts/:id/balance", accountCrontoller.getBalance)
+// app.get("/accounts", accountCrontoller.getAccounts)
 
 
-app.post("/accounts", accountCrontoller.postAccount)
+// app.get("/accounts/:id/balance", accountCrontoller.getBalance)
 
 
-app.put("/accounts/:id/balance",accountCrontoller.editAccount)
+// app.post("/accounts", accountCrontoller.postAccount)
+
+
+// app.put("/accounts/:id/balance",accountCrontoller.editAccount)
