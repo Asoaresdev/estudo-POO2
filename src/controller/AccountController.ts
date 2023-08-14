@@ -14,8 +14,6 @@ export class AccountController {
 
             res.status(200).send(output)
         } catch (error) {
-            console.log(error)
-
             if (res.statusCode === 200) {
                 res.status(500)
             }

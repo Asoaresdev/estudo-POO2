@@ -41,22 +41,3 @@ app.get("/", async (req: Request, res: Response) => {
 app.use("/users", userRouter)
 app.use("/accounts", accountRouter)
 
-// const userController = new UserController()
-// const accountCrontoller = new AccountController()
-
-// app.get("/users", userController.getUsers)
-
-
-// app.post("/users", userController.postUser)
-
-
-// app.get("/accounts", accountCrontoller.getAccounts)
-
-
-// app.get("/accounts/:id/balance", accountCrontoller.getBalance)
-
-
-// app.post("/accounts", accountCrontoller.postAccount)
-
-
-// app.put("/accounts/:id/balance",accountCrontoller.editAccount)

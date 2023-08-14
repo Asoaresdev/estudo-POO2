@@ -50,12 +50,10 @@ export class AccountBusiness {
         const {id, ownerId} = input
 
         if (typeof id !== "string") {
-            // res.status(400)
             throw new BadRequestError("'id' deve ser string")
         }
 
         if (typeof ownerId !== "string") {
-            // res.status(400)
             throw new BadRequestError("'ownerId' deve ser string")
         }
 
@@ -63,7 +61,6 @@ export class AccountBusiness {
         const accountDBExists = await accountDatabase.findAccountById(id)
 
         if (accountDBExists) {
-            // res.status(400)
             throw new BadRequestError("'id' já existe")
         }
 
@@ -93,7 +90,6 @@ export class AccountBusiness {
         const { id, value } = input
 
         if (typeof value !== "number") {
-            // res.status(400)
             throw new BadRequestError("'value' deve ser number")
         }
 
@@ -101,7 +97,6 @@ export class AccountBusiness {
         const accountDB = await accountDatabase.findAccountById(id)
 
         if (!accountDB) {
-            // res.status(404)
             throw new NotFoundError("'id' não encontrado")
         }
 
