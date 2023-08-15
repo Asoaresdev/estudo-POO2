@@ -8,10 +8,10 @@ POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-    "id":"teste0140",
-    "name":"teste40 rotas",
-    "email":"teste0140@email",
-    "password":"teste123"
+    "id":"teste01DTO",
+    "name":"teste1 DTO",
+    "email":"teste1DTO@email.com",
+    "password":"testeDTO1234"
 }
 
 ###
