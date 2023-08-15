@@ -4,6 +4,9 @@ import { Request, Response } from "express"
 // import { Account } from "../models/Account"
 // import { AccountDB } from "../types"
 import { AccountBusiness } from "../business/AccountBusiness"
+import { CreateAccountSchema } from "../dtos/createAccountDto"
+import { ZodError } from "zod"
+import { EditAccountSchema } from "../dtos/editAccountDto"
 
 export class AccountController {
     public getAccounts = async (req: Request, res: Response) => {
@@ -55,10 +58,10 @@ export class AccountController {
     public postAccount = async(req:Request, res:Response) => {
         try {
             const { id, ownerId } = req.body
-            const input = {
+            const input = CreateAccountSchema.parse( {
                 id,
                 ownerId
-            }
+            })
     
             const accountBusiness = new AccountBusiness()
             const output = await accountBusiness.createAccount(input)
@@ -70,8 +73,9 @@ export class AccountController {
             if (res.statusCode === 200) {
                 res.status(500)
             }
-    
-            if (error instanceof Error) {
+            if(error instanceof ZodError){
+                res.status(400).send(error.issues)
+            }else if (error instanceof Error) {
                 res.send(error.message)
             } else {
                 res.send("Erro inesperado")
@@ -84,10 +88,10 @@ export class AccountController {
             const id = req.params.id
             const value = req.body.value
 
-            const input = {
+            const input = EditAccountSchema.parse({
                 id,
                 value
-            }
+            })
             
             const accountBusiness = new AccountBusiness()
             const output = await accountBusiness.editAcccount(input)
@@ -99,8 +103,10 @@ export class AccountController {
             if (res.statusCode === 200) {
                 res.status(500)
             }
-    
-            if (error instanceof Error) {
+            if(error instanceof ZodError) {
+                res.status(400).send(error.issues)
+            }
+            else if (error instanceof Error) {
                 res.send(error.message)
             } else {
                 res.send("Erro inesperado")

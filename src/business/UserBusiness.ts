@@ -1,10 +1,11 @@
 import { UserDatabase } from "../database/UserDatabase"
+import { CreateUserInputDTO, CreateUserOutputDTO } from "../dtos/createUserDto"
 import { BadRequestError } from "../errors/BadRequestError"
 import { User } from "../models/User"
 import { UserDB } from "../types"
 
 export class UserBusiness {
-    public getUsers = async(input:any) => {
+    public getUsers = async (input: any) => {
         const { userName } = input
 
         const userDatabase = new UserDatabase()
@@ -22,32 +23,32 @@ export class UserBusiness {
         return output
     }
 
-    public postUser = async (input:any) => {
+    public postUser = async (input: CreateUserInputDTO): Promise<CreateUserOutputDTO> => {
         const { id, name, email, password } = input
 
-        if (typeof id !== "string") {
-            throw new BadRequestError("'id' deve ser string")
-        }
+        // if (typeof id !== "string") {
+        //     throw new BadRequestError("'id' deve ser string")
+        // }
 
-        if (typeof name !== "string") {
-            throw new BadRequestError("'name' deve ser string")
-        }
+        // if (typeof name !== "string") {
+        //     throw new BadRequestError("'name' deve ser string")
+        // }
 
-        if (typeof email !== "string") {
-            throw new BadRequestError("'email' deve ser string")
-        }
+        // if (typeof email !== "string") {
+        //     throw new BadRequestError("'email' deve ser string")
+        // }
 
-        if (typeof password !== "string") {
-            throw new BadRequestError("'password' deve ser string")
-        }
+        // if (typeof password !== "string") {
+        //     throw new BadRequestError("'password' deve ser string")
+        // }
 
         const userDatabase = new UserDatabase()
         const userDBExists = await userDatabase.findUserById(id, email)
 
         if (userDBExists) {
-            throw new BadRequestError("'id' ou email já existe")
+            throw new BadRequestError("'id' ou 'email' já existe")
         }
-    
+
 
         const newUser = new User(
             id,
@@ -66,9 +67,14 @@ export class UserBusiness {
         }
 
         await userDatabase.insertUser(newUserDB)
-        const output = {
-            message: "usuario criado com sucesso", 
-            user: newUserDB
+        const output: CreateUserOutputDTO = {
+            message: "usuario criado com sucesso",
+            user: {
+                id: newUser.getId(),
+                name: newUser.getName(),
+                email: newUser.getEmail(),
+                createdAt: newUser.getCreatedAt()
+            }
         }
         return output
     }

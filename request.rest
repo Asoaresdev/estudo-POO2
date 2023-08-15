@@ -1,4 +1,5 @@
-GET http://localhost:3003/ping
+
+
 
 ###
 GET http://localhost:3003/users
@@ -8,14 +9,13 @@ POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-    "id":"teste0140",
-    "name":"teste40 rotas",
-    "email":"teste0140@email",
-    "password":"teste123"
+    "id":"teste01DTO",
+    "name":"teste1 DTO",
+    "email":"teste1DTO@email.com",
+    "password":"testeDTO1234"
 }
 
 ###
-
 GET http://localhost:3003/accounts/a003[TESTE]/balance
 
 ###
@@ -27,14 +27,14 @@ POST http://localhost:3003/accounts/new-account
 Content-Type: application/json
 
 {
-    "id":"a004[TESTE ROTAS]",
+    "id":"a004[TESTE DTO]",
     "ownerId":"teste01"
 }
 
 ###
-PUT http://localhost:3003/accounts/a003[TESTE]/balance
+PUT http://localhost:3003/accounts/a004[TESTE DTO]/balance
 Content-Type: application/json
 
 {
-    "value": 5
+    "value": 500
 }
