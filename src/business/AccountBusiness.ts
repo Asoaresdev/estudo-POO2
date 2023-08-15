@@ -1,4 +1,6 @@
 import { AccountDatabase } from "../database/AccountDatabase"
+import { CreateAccountInputDTO, CreateAccountOutputDTO } from "../dtos/createAccountDto"
+import { EditAccountInputDTO, EditAccountOutputDTO } from "../dtos/editAccountDto"
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { Account } from "../models/Account"
@@ -16,19 +18,18 @@ export class AccountBusiness {
             accountDB.created_at
         ))
 
-        const output:any = accounts
+        const output: any = accounts
         return output
 
     }
 
-    public getBalance = async (input:any) => {
+    public getBalance = async (input: any) => {
         const { id } = input
 
         const accountDatabase = new AccountDatabase()
         const accountDB = await accountDatabase.findAccountById(id)
 
         if (!accountDB) {
-            // res.status(404)
             throw new NotFoundError("'id' não encontrado")
         }
 
@@ -41,21 +42,13 @@ export class AccountBusiness {
 
         const output = {
             balance: account.getBalance()
-        } 
-       
-        return output 
+        }
+
+        return output
     }
 
-    public createAccount = async(input:any) => {
-        const {id, ownerId} = input
-
-        if (typeof id !== "string") {
-            throw new BadRequestError("'id' deve ser string")
-        }
-
-        if (typeof ownerId !== "string") {
-            throw new BadRequestError("'ownerId' deve ser string")
-        }
+    public createAccount = async (input: CreateAccountInputDTO):Promise<CreateAccountOutputDTO> => {
+        const { id, ownerId } = input
 
         const accountDatabase = new AccountDatabase()
         const accountDBExists = await accountDatabase.findAccountById(id)
@@ -79,14 +72,19 @@ export class AccountBusiness {
         }
 
         await accountDatabase.insertAccount(newAccountDB)
-        const output = {
+        const output: CreateAccountOutputDTO = {
             message: "Conta criada com sucesso",
-            neewAccount: newAccountDB
+            account: {
+                id: newAccount.getId(),
+                balance: newAccount.getBalance(),
+                ownerId: newAccount.getOwnerId(),
+                createdAt: newAccount.getCreatedAt()
+            }
         }
         return output
     }
 
-    public editAcccount = async(input:any) => {
+    public editAcccount = async (input: EditAccountInputDTO): Promise<EditAccountOutputDTO> => {
         const { id, value } = input
 
         if (typeof value !== "number") {
@@ -111,10 +109,15 @@ export class AccountBusiness {
         account.setBalance(newBalance)
 
         await accountDatabase.updateBalanceById(id, newBalance)
-        
-        const output = {
+
+        const output: EditAccountOutputDTO = {
             message: "saldo alterado com sucesso",
-            balance: newBalance
+            account: {
+                id: accountDB.id,
+                balance: newBalance,
+                ownerId: accountDB.owner_id,
+                createdAt: accountDB.created_at
+            }
         }
 
         return output
