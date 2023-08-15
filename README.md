@@ -12,6 +12,7 @@ Usando:
 - [x] Knex
 - [x] Arquitetura de 3 camada, usando: controller, business e data
 - [x] Router com express
+- [x] DTOs usando a biblioteca Zod
 - [x] Postman para documentação
 - [x] Deploy usando render  https://render.com/ 
 
